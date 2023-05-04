@@ -47,7 +47,11 @@ export async function get_transaction(hash) {
         BigInt(computationCost) + BigInt(storageCost) - BigInt(storageRebate)
       ),
       tx: balanceChanges
-        .filter(({ coinType }) => coinType === '0x2::sui::SUI')
+        .filter(
+          ({ coinType, amount: change_amount }) =>
+            coinType === '0x2::sui::SUI' &&
+            new BigNumber(change_amount).isGreaterThan(0)
+        )
         .map(({ owner: { AddressOwner }, amount }) => ({
           to: AddressOwner,
           amount: to_sui(amount),
