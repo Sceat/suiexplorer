@@ -22,7 +22,7 @@ sc-disableScollBar()
 
 :root
   font-size 18px
-  background #212121
+  background #f0f3f7
 
 *
   sc-reset()
